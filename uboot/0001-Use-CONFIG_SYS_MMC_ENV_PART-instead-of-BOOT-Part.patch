@@ -1,0 +1,32 @@
+From c3c98ab2bc148e44b0676e832e763813d540ba91 Mon Sep 17 00:00:00 2001
+From: Justin Schneck <jschneck@mac.com>
+Date: Fri, 26 Aug 2022 10:24:28 -0400
+Subject: [PATCH] Use CONFIG_SYS_MMC_ENV_PART instead of BOOT Part
+
+iMX boards query the part to determine the hardware partition insead
+of using CONFIG_SYS_MMC_ENV_PART. This prevents loading the environment
+from the USER partition 0.
+---
+ env/mmc.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/env/mmc.c b/env/mmc.c
+index 10434ccf..d631daf0 100644
+--- a/env/mmc.c
++++ b/env/mmc.c
+@@ -127,7 +127,11 @@ static unsigned char env_mmc_orig_hwpart;
+ 
+ static int mmc_set_env_part(struct mmc *mmc)
+ {
+-	uint part = mmc_get_env_part(mmc);
++#ifdef CONFIG_SYS_MMC_ENV_PART
++        uint part = CONFIG_SYS_MMC_ENV_PART;
++#else
++        uint part = mmc_get_env_part(mmc);
++#endif
+ 	int dev = mmc_get_env_dev();
+ 	int ret = 0;
+ 
+-- 
+2.34.1
+
