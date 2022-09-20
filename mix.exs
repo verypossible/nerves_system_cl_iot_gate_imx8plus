@@ -99,19 +99,18 @@ defmodule NervesSystemCLIOTGATEIMX8PLUS.MixProject do
   defp package_files do
     [
       "fwup_include",
+      "linux",
       "rootfs_overlay",
+      "uboot",
       "CHANGELOG.md",
-      "cmdline.txt",
-      "config.txt",
+      "Config.in",
       "fwup-revert.conf",
       "fwup.conf",
       "LICENSE",
-      "linux-5.4.defconfig",
       "mix.exs",
       "nerves_defconfig",
       "post-build.sh",
       "post-createfs.sh",
-      "ramoops.dts",
       "README.md",
       "VERSION"
     ]
