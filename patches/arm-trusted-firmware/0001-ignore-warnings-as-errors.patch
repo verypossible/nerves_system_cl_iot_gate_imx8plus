@@ -1,0 +1,25 @@
+From 90a944aabe15890a4a646debb4dd01daa262726d Mon Sep 17 00:00:00 2001
+From: Justin Schneck <jschneck@mac.com>
+Date: Mon, 16 Jan 2023 12:36:53 -0500
+Subject: [PATCH] ignore warnings as errors
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index fdc83d9..1e7df13 100644
+--- a/Makefile
++++ b/Makefile
+@@ -440,7 +440,7 @@ TF_LDFLAGS		+=	$(subst --,-Xlinker --,$(TF_LDFLAGS_$(ARCH)))
+ 
+ # LD = gcc-ld (ld) or llvm-ld (ld.lld) or other
+ else
+-TF_LDFLAGS		+=	--fatal-warnings -O1
++TF_LDFLAGS		+=	-O1
+ TF_LDFLAGS		+=	--gc-sections
+ # ld.lld doesn't recognize the errata flags,
+ # therefore don't add those in that case
+-- 
+2.34.1
+
